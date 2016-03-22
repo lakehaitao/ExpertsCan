@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.expertscan.data">
+	<class name="ProjInfo" table="projinfo">
+		<id name="projid" column="projid">
+			<generator class="increment"></generator>
+		</id>
+		<property name="title" column="title"></property>
+		<property name="description" column="description"></property>
+		<property name="releaseDate" column="releasedate"></property>
+		<property name="expense" column="expense"></property>
+		
+		<many-to-one name="enterprise" class="EntInfo" lazy="false">
+			<column name="entid"></column>
+		</many-to-one>
+		
+		<property name="state" column="state"></property>
+	</class>
+</hibernate-mapping>

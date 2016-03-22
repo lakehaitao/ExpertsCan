@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.expertscan.data">
+	<class name="EntInfo" table="entinfo">
+		<id name="entid" column="entid">
+			<generator class="increment"></generator>
+		</id>
+		<property name="email" column="email"></property>
+		<property name="password" column="password"></property>
+		<property name="name" column="name"></property>
+		<property name="address" column="address"></property>
+		<property name="email1" column="email1"></property>
+		<property name="phone0" column="phone0"></property>
+		<property name="description" column="description"></property>
+		<property name="logo" column="logo"></property>
+		
+		<set name="projects" table="projinfo" cascade="save-update" inverse="true">
+			<key column="entid"></key>
+			<one-to-many class="ProjInfo"></one-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

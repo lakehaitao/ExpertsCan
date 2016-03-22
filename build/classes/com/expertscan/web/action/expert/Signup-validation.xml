@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.2//EN" "http://struts.apache.org/dtds/xwork-validator-1.0.2.dtd">
+<validators>
+    <field name="email">
+        <field-validator type="requiredstring">
+            <message>Please fill out the email.</message>
+        </field-validator>
+        <field-validator type="email">
+            <message>The email address you entered is not valid.</message>
+        </field-validator>
+    </field>
+    <field name="password">
+        <field-validator type="requiredstring">
+            <message>Please fill out the password.</message>
+        </field-validator>
+    </field>
+    <field name="confirmPassword">
+        <field-validator type="requiredstring">
+            <message>Please fill out the password again.</message>
+        </field-validator>
+    </field>
+    <field name="expertName">
+        <field-validator type="requiredstring">
+            <message>Please fill out the real name.</message>
+        </field-validator>
+    </field>
+</validators>

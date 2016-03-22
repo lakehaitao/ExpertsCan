@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	
+<struts>
+
+	<constant name="struts.devMode" value="true" />	
+	
+ 	<package name="default-package" extends="struts-default">
+ 		<interceptors>
+ 			<interceptor name="SigninRepeatedlyInterceptor" class="com.expertscan.web.interceptors.SigninRepeatedly" />
+ 		</interceptors>
+		<action name="PageNotFound">
+			<result>/404.jsp</result>
+		</action>
+	</package>
+	
+	<package name="expert" extends="default-package" namespace="/expert">
+		<default-action-ref name="PageNotFound" />
+		<action name="loginRequest" class="ExpertSigninAction">
+			<interceptor-ref name="SigninRepeatedlyInterceptor" />
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="redirect">/</result>
+			<result name="signinRepeatedly">/error.jsp</result>
+			<result name="input">/expert/signin_error.jsp</result>
+		</action>
+		
+		<action name="signUpRequest" class="ExpertSignupAction">		
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="redirect">/</result>
+		</action>
+		
+		<action name="updateInfo" class="UpdateExpInfoAction">		
+			<result name="success" type="redirect">/informationCenter</result>
+		</action>
+	
+	</package>
+	
+	<package name="enterprise" extends="default-package" namespace="/enterprise">
+		<default-action-ref name="PageNotFound" />
+		<action name="loginRequest" class="EnterpriseSigninAction">
+			<interceptor-ref name="SigninRepeatedlyInterceptor" />
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="redirect">/</result>
+			<result name="signinRepeatedly">/error.jsp</result>
+			<result name="input">/enterprise/signin_error.jsp</result>
+		</action>
+		
+		<action name="signUpRequest" class="EnterpriseSignupAction">
+			<result name="success" type="redirect">/</result>
+		</action>
+		
+		<action name="updateInfo" class="UpdateEntInfoAction">		
+			<result name="success" type="redirect">/informationCenter</result>
+		</action>
+		
+		<action name="information" class="EntInfoByIdAction">		
+			<result name="self" type="redirect">/informationCenter</result>
+			<result name="success">/enterprise/InformationShow.jsp</result>
+		</action>
+		
+		<action name="newProjectPage" class="CanNewProj">		
+			<result name="success">/project/new.jsp</result>
+		</action>
+	
+	</package>
+	
+	<package name="project" extends="default-package" namespace="/project">
+		<default-action-ref name="PageNotFound" />
+		
+		<action name="new" class="NewProj">		
+			<result name="success">/project/edit.jsp</result>
+		</action>
+	</package>
+	
+	
+	<package name="common" extends="default-package" namespace="/">
+		<default-action-ref name="PageNotFound" />
+		<action name="">
+			<result>/index.jsp</result>
+		</action>
+		<action name="signin">
+			<result>/signin.jsp</result>
+		</action>
+		<action name="signup">
+			<result>/signup.jsp</result>
+		</action>
+		
+		<action name="signout" class="SignoutAction">
+			<result name="success" type="redirect">/</result>
+		</action>
+		
+		<action name="informationCenter" class="InfoCenterAction">
+			<result name="expert">/expert/InformationCenter.jsp</result>
+			<result name="enterprise">/enterprise/InformationCenter.jsp</result>
+		</action>
+		
+		<action name="test">
+			<result>/test.jsp</result>
+		</action>
+		
+		
+	</package>
+	
+</struts>
