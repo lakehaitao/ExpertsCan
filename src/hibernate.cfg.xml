@@ -15,5 +15,8 @@
 		<mapping resource="com/expertscan/data/EntInfo.hbm.xml" />
 		<mapping resource="com/expertscan/data/ExpInfo.hbm.xml" />
 		<mapping resource="com/expertscan/data/ProjInfo.hbm.xml" />
+		<mapping resource="com/expertscan/data/ProjExpTendering.hbm.xml" />
+		<mapping resource="com/expertscan/data/ProjExpOngoing.hbm.xml" />
+		<mapping resource="com/expertscan/data/ProjExpCompleted.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

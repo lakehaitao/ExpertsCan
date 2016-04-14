@@ -1,4 +1,4 @@
-package com.expertscan.web.action.enterprise;
+package com.expertscan.web.action.project;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class NewProject extends ActionSupport {
 	 */
 	private static final long serialVersionUID = -2214971805476492554L;
 	
-	private com.expertscan.business.enterprise.NewProject newProjectService;
+	private com.expertscan.business.project.NewProject newProjectService;
 	
 	private Map<String, Object> session;
 	private HttpServletRequest request;
@@ -39,12 +39,12 @@ public class NewProject extends ActionSupport {
 	}
 
 
-	public com.expertscan.business.enterprise.NewProject getNewProjectService() {
+	public com.expertscan.business.project.NewProject getNewProjectService() {
 		return newProjectService;
 	}
 
 
-	public void setNewProjectService(com.expertscan.business.enterprise.NewProject newProjectService) {
+	public void setNewProjectService(com.expertscan.business.project.NewProject newProjectService) {
 		this.newProjectService = newProjectService;
 	}
 

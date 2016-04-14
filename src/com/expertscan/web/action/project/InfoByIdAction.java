@@ -1,6 +1,5 @@
-package com.expertscan.web.action.enterprise;
+package com.expertscan.web.action.project;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
 import com.expertscan.business.enterprise.UserValidation;
-import com.expertscan.data.EntInfo;
+import com.expertscan.data.ProjInfo;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,7 +18,7 @@ public class InfoByIdAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 7011051844804932435L;
 	
-	private Integer entid;
+	private Integer projid;
 	private UserValidation validator;
 	private Map<String, Object> session;
 	private HttpServletRequest request;
@@ -28,8 +27,8 @@ public class InfoByIdAction extends ActionSupport {
 		return session;
 	}
 
-	public Integer getEntid() {
-		return entid;
+	public Integer getProjid() {
+		return projid;
 	}
 
 	public UserValidation getValidator() {
@@ -40,8 +39,8 @@ public class InfoByIdAction extends ActionSupport {
 		this.validator = validator;
 	}
 
-	public void setEntid(Integer entid) {
-		this.entid = entid;
+	public void setProjid(Integer projid) {
+		this.projid = projid;
 	}
 	
 	public InfoByIdAction() {
@@ -54,16 +53,16 @@ public class InfoByIdAction extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		
-		if(validator.isSelf(entid, session)){
-			return "self";
+		ProjInfo proj = ProjInfo.retrieveById(projid, true);
+		
+		if(proj == null){
+			return ERROR;
 		}else{
-			EntInfo ent = new EntInfo();
-			List<?> result = ent.retrieveById(entid, true);
-			if(result.size() == 0){
-				return ERROR;
+			request.setAttribute("information", proj);
+			if(validator.isSelf(proj.getEnterprise().getEntid(), session)){
+				return "edit";
 			}else{
-				request.setAttribute("information", result.get(0));
-				return SUCCESS;
+				return "show";
 			}
 		}		
 	}

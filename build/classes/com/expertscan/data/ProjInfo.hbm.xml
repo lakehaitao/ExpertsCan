@@ -17,5 +17,10 @@
 		</many-to-one>
 		
 		<property name="state" column="state"></property>
+		
+		<set name="expertsTendering" table="proj_exp_tendering" cascade="save-update">
+			<key column="projid"></key>
+			<one-to-many class="ProjExpTendering"/>
+		</set>
 	</class>
 </hibernate-mapping>

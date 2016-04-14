@@ -66,9 +66,14 @@
 	
 	<!-- New a Project -->
 	<bean name="CanNewProj" class="com.expertscan.web.action.enterprise.CanNewProject" scope="request"></bean>
-	<bean name="NewProj" class="com.expertscan.web.action.enterprise.NewProject" scope="request">
+	<bean name="NewProj" class="com.expertscan.web.action.project.NewProject" scope="request">
 		<property name="newProjectService" ref="NewProjService"></property>
 	</bean>
-	<bean name="NewProjService" class="com.expertscan.business.enterprise.NewProject" scope="request"></bean>
+	<bean name="NewProjService" class="com.expertscan.business.project.NewProject" scope="request"></bean>
+	
+	<!-- Show the Project Information -->
+	<bean name="ProjInfoByIdAction" class="com.expertscan.web.action.project.InfoByIdAction" scope="request">
+		<property name="validator" ref="EntValidation"></property>
+	</bean>
 	
 </beans>

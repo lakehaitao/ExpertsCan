@@ -70,8 +70,14 @@
 		<default-action-ref name="PageNotFound" />
 		
 		<action name="new" class="NewProj">		
-			<result name="success">/project/edit.jsp</result>
+			<result name="success">/project/edit_tendering.jsp</result>
 		</action>
+		
+		<action name="information" class="ProjInfoByIdAction">		
+			<result name="edit">/project/edit_tendering.jsp</result>
+			<result name="show">/project/show.jsp</result>
+		</action>
+		
 	</package>
 	
 	

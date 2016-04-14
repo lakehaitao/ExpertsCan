@@ -1,6 +1,8 @@
 package com.expertscan.data;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -15,6 +17,14 @@ public class ProjInfo {
 	private EntInfo enterprise;
 	private Integer state;
 	
+	private Set<ProjExpTendering> expertsTendering = new HashSet<ProjExpTendering>();
+	
+	public Set<ProjExpTendering> getExpertsTendering() {
+		return expertsTendering;
+	}
+	public void setExpertsTendering(Set<ProjExpTendering> expertsTendering) {
+		this.expertsTendering = expertsTendering;
+	}
 	public Integer getState() {
 		return state;
 	}
@@ -83,5 +93,22 @@ public class ProjInfo {
 		session.save(this);
 		session.getTransaction().commit();
 		return true;
+	}
+	
+	
+	public static ProjInfo retrieveById(int projid, boolean needLoad){
+		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		ProjInfo proj = session.load(ProjInfo.class, projid);
+		
+		if(needLoad){
+			Hibernate.initialize(proj.getEnterprise());
+		
+			Hibernate.initialize(proj.getExpertsTendering());
+		}
+		
+		session.getTransaction().commit();
+		return proj;
 	}
 }

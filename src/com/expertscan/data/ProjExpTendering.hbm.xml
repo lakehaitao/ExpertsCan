@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.expertscan.data">
+	<class name="ProjExpTendering" table="proj_exp_tendering">
+		<composite-id>
+			<key-many-to-one name="proj" class="ProjInfo" column="projid" lazy="false"></key-many-to-one>
+			<key-many-to-one name="exp" class="ExpInfo" column="expid" lazy="false"></key-many-to-one>
+		</composite-id>
+		<property name="state" column="state"></property>
+	</class>
+</hibernate-mapping>

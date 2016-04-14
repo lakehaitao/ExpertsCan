@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.expertscan.data.ExpInfo;
-import com.expertscan.data.ProjInfo;
 import com.expertscan.web.SessionUpdate;
 
 public class UserValidation {

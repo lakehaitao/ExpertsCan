@@ -99,7 +99,7 @@ public class EntInfo {
 		return result;
 	}
 	
-	public List<?> retrieve(int entid){
+	public List<?> retrieveById(int entid, boolean needLoad){
 		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		Query q = session.createQuery("from EntInfo e where e.entid ='" + entid + "'");
@@ -107,7 +107,9 @@ public class EntInfo {
 		
 		if(result.size()!=0){
 			EntInfo ent = (EntInfo) result.get(0);
-			Hibernate.initialize(ent.getProjects());
+			if(needLoad){
+				Hibernate.initialize(ent.getProjects());
+			}
 		}
 		
 		session.getTransaction().commit();

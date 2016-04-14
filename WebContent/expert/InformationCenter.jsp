@@ -132,14 +132,16 @@
 										<tbody>
 							<%
 									for(ProjInfo p : expert.getProjectsBidding()){
+										if(p.getState() == 0){
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="#" target="_blank"><%=p.getTitle() %></a></td>
-												<td><a href="enterprise/information?entid=<%=p.getProjid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
+												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
+										}
 									}
 							%>
 										</tbody>
@@ -170,14 +172,16 @@
 										<tbody>
 							<%
 									for(ProjInfo p : expert.getProjectsOngoing()){
+										if(p.getState() == 1){
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="#" target="_blank"><%=p.getTitle() %></a></td>
-												<td><a href="#" target="_blank"><%=p.getEnterprise().getName() %></a></td>
+												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
+										}
 									}
 							%>
 										</tbody>
@@ -208,14 +212,16 @@
 										<tbody>
 							<%
 									for(ProjInfo p : expert.getProjectsCompleted()){
+										if(p.getState() == 2){
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="#" target="_blank"><%=p.getTitle() %></a></td>
-												<td><a href="#" target="_blank"><%=p.getEnterprise().getName() %></a></td>
+												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
+										}
 									}
 							%>
 										</tbody>

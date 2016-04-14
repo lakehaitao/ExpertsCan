@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="com.expertscan.data.ExpInfo, com.expertscan.data.ProjInfo"%>
+    import="com.expertscan.data.ExpInfo, com.expertscan.data.ProjInfo, com.expertscan.data.ProjExpTendering"%>
 <%
 	ProjInfo project = (ProjInfo)request.getAttribute("information");
 	String baseURL = request.getContextPath();
@@ -91,6 +91,29 @@
 						</div>
 					</div>
 				</form>
+			</div>
+			
+			<div class="bs-docs-section" id="Experts">
+				<h1 class="page-header">Experts</h1>
+				<%
+					if(project.getExpertsTendering().size() == 0){
+				%>
+					尚无专家投标
+				<%
+					}else{
+						for(ProjExpTendering relation : project.getExpertsTendering()){
+							ExpInfo exp = relation.getExp();
+				%>
+						<div>
+							<p>专家名：<%=exp.getName() %></p>
+							<p>专家id：<%=exp.getExpid() %></p>
+							<p>状态：<%=relation.getState() %></p>
+						</div>
+				<%
+						}
+
+					}
+				%>	
 			</div>
 		</div>
 		<jsp:include page="../master_footer.jsp" />

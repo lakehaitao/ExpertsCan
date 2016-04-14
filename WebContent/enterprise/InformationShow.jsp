@@ -115,7 +115,7 @@
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="enterprise/information?entid=<%=p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
@@ -151,7 +151,7 @@
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="#" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
@@ -187,7 +187,7 @@
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="#" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
