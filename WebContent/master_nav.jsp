@@ -27,10 +27,10 @@
 			<% if(request.getSession().getAttribute("userName") == null){ %>
 			
 			<div class="nav navbar-right btn-group">
-				<a href="signin">
+				<a href="<%=baseURL %>/signin">
 					<button type="button" class="btn btn-default navbar-btn">Sign in</button>
 				</a>
-				<a href="signup">
+				<a href="<%=baseURL %>/signup">
 					<button type="button" class="btn btn-default navbar-btn">Sign up</button>
 				</a>
 			</div>
@@ -43,7 +43,7 @@
 				String userType = (String)request.getSession().getAttribute("userType");
 				if( userType!= null && userType.equals("enterprise")){ %>
 			<div class="nav navbar-right">
-					<a href="enterprise/newProjectPage.action">
+					<a href="<%=baseURL %>/enterprise/newProjectPage.action">
 						<button type="button" class="btn btn-primary navbar-btn">New a Project !</button>
 					</a>
 			</div>
@@ -55,9 +55,9 @@
 					<%= request.getSession().getAttribute("userName") %>
 					<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="informationCenter">Information Center</a></li>
+						<li><a href="<%=baseURL %>/informationCenter">Information Center</a></li>
 						<li role="separator" class="divider"></li>
-						<li><a href="signout">Sign out</a></li>
+						<li><a href="<%=baseURL %>/signout">Sign out</a></li>
 					</ul>
 				</li>
 			</ul>

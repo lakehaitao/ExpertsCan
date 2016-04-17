@@ -7,6 +7,9 @@
 
 	<constant name="struts.devMode" value="true" />	
 	
+	
+	
+	<!-- Default Package -->
  	<package name="default-package" extends="struts-default">
  		<interceptors>
  			<interceptor name="SigninRepeatedlyInterceptor" class="com.expertscan.web.interceptors.SigninRepeatedly" />
@@ -16,6 +19,9 @@
 		</action>
 	</package>
 	
+	
+	
+	<!-- Expert Package -->
 	<package name="expert" extends="default-package" namespace="/expert">
 		<default-action-ref name="PageNotFound" />
 		<action name="loginRequest" class="ExpertSigninAction">
@@ -34,9 +40,18 @@
 		<action name="updateInfo" class="UpdateExpInfoAction">		
 			<result name="success" type="redirect">/informationCenter</result>
 		</action>
+		
+		<action name="information" class="ExpInfoByIdAction">		
+			<result name="self" type="redirect">/informationCenter</result>
+			<result name="success">/expert/InformationShow.jsp</result>
+			<result name="anonymous">/expert/Anonymous.jsp</result>
+		</action>
 	
 	</package>
 	
+	
+	
+	<!-- Enterprise Package -->
 	<package name="enterprise" extends="default-package" namespace="/enterprise">
 		<default-action-ref name="PageNotFound" />
 		<action name="loginRequest" class="EnterpriseSigninAction">
@@ -66,6 +81,9 @@
 	
 	</package>
 	
+	
+	
+	<!-- Project Package -->
 	<package name="project" extends="default-package" namespace="/project">
 		<default-action-ref name="PageNotFound" />
 		
@@ -75,12 +93,14 @@
 		
 		<action name="information" class="ProjInfoByIdAction">		
 			<result name="edit">/project/edit_tendering.jsp</result>
-			<result name="show">/project/show.jsp</result>
+			<result name="show">/project/show_xx.jsp</result>
 		</action>
 		
 	</package>
 	
 	
+	
+	<!-- Common Package -->
 	<package name="common" extends="default-package" namespace="/">
 		<default-action-ref name="PageNotFound" />
 		<action name="">
@@ -105,7 +125,6 @@
 		<action name="test">
 			<result>/test.jsp</result>
 		</action>
-		
 		
 	</package>
 	

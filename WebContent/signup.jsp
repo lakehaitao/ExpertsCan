@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<% String baseURL = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,11 +9,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="signup page">
 
-		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="./css/signin.css">
+		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/signin.css">
 
-		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<%=baseURL %>/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="<%=baseURL %>/js/bootstrap.min.js"></script>
 
 		<title>注册专家汇</title>
 	</head>
@@ -31,7 +31,7 @@
 				<!-- 注册界面 -->
 				<div class="tab-content">
 					<div class="tab-pane fade in active" id="expSignin">
-						<form class="form-signin" action="expert/signUpRequest.action" method="post">
+						<form class="form-signin" action="<%=baseURL %>/expert/signUpRequest.action" method="post">
 							<label for="inputEmail" class="sr-only">Email address</label>
 							<input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
 							
@@ -48,7 +48,7 @@
 						</form>
 					</div>
 					<div class="tab-pane fade" id="entSignin">
-						<form class="form-signin" action="enterprise/signUpRequest.action" method="post">
+						<form class="form-signin" action="<%=baseURL %>/enterprise/signUpRequest.action" method="post">
 							<label for="inputEmail" class="sr-only">Email address</label>
 							<input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
 							<label for="inputPassword" class="sr-only">Password</label>

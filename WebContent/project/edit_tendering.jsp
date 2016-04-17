@@ -15,6 +15,7 @@
 		
 		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/infoCenter.css">
+		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/glyphicons.css">
 		
 		<script type="text/javascript" src="<%=baseURL %>/js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="<%=baseURL %>/js/bootstrap.min.js"></script>
@@ -24,7 +25,7 @@
 	<body>
 		<jsp:include page="../master_nav.jsp" />
 		<div class="container">
-			<div class="bs-docs-section" id="Overview">
+			<div class="bs-docs-section row" id="Overview">
 				<h1 class="page-header">Overview</h1>
 				<form class="form-horizontal" action="#" method="post">
 					<div class="form-group"  style="color:white">
@@ -60,7 +61,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Enterprise</label>
 						<div class="col-sm-10">
-							<p class="form-control-static"><a href="#"><%= project.getEnterprise().getName() %></a></p>
+							<p class="form-control-static"><a href="<%=baseURL %>/informationCenter" target="_blank"><%= project.getEnterprise().getName() %></a></p>
 						</div>
 					</div>
 					<div class="form-group">
@@ -104,10 +105,62 @@
 						for(ProjExpTendering relation : project.getExpertsTendering()){
 							ExpInfo exp = relation.getExp();
 				%>
-						<div>
-							<p>专家名：<%=exp.getName() %></p>
-							<p>专家id：<%=exp.getExpid() %></p>
-							<p>状态：<%=relation.getState() %></p>
+						<div class="border-section row">
+							<div class="col-sm-10">
+								<div class="row">
+									<label class="col-sm-2 control-label">Expert Name</label>
+									<div class="col-sm-10">
+										<%-- <% if(exp.getIsPublic()){ %>
+										<p><a href="expert/information?expid=<%= exp.getExpid() %>" target="_blank"><%= exp.getName() %></a></p>
+										<% }else{ %>
+										<p>Anonymous</p>
+										<% } %> --%>
+										<p><a href="<%=baseURL %>/expert/information?expid=<%= exp.getExpid() %>" target="_blank"><%= exp.getName() %></a></p>
+									</div>
+								</div>
+								<div class="row">
+									<label class="col-sm-2 control-label">Application State</label>
+									<div class="col-sm-10">
+										<%
+											switch(relation.getState()){
+											case 0:
+										%>
+										<p>Pending</p>
+										<%
+											break;
+											case 1:
+										%>
+										<p>Accepted</p>
+										<%
+											break;
+											case 2:
+										%>
+										<p>Denied</p>
+										<% 
+											break;
+											}
+										%>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2 bs-glyphicons">
+								<ul class="bs-glyphicons-list">
+									<li>
+										<button type="button" class="btn btn-default">
+											<span class="glyphicon glyphicon-ok"></span>
+											&nbsp;
+											<span class="glyphicon-class">Accept</span>
+										</button>
+									</li>
+									<li>
+										<button type="button" class="btn btn-default">
+											<span class="glyphicon glyphicon-remove"></span>
+											&nbsp;
+											<span class="glyphicon-class">Deny</span>
+										</button>
+									</li>
+								</ul>
+							</div>
 						</div>
 				<%
 						}

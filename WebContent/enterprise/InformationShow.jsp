@@ -45,7 +45,7 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<div class="bs-docs-section" id="Overview">
 						<h1 class="page-header">Overview</h1>
-						<form class="form-horizontal" action="enterprise/updateInfo.action" method="post">
+						<form class="form-horizontal" action="<%=baseURL %>/enterprise/updateInfo.action" method="post">
 								<div class="form-group"  style="color:white">
 									<label class="col-sm-2 control-label">Enterprise ID</label>
 									<div class="col-sm-10">
@@ -115,7 +115,7 @@
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="<%=baseURL %>/project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
@@ -151,7 +151,7 @@
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="<%=baseURL %>/project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
@@ -187,7 +187,7 @@
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="<%=baseURL %>/project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%

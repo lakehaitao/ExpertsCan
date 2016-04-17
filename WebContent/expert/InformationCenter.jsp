@@ -4,6 +4,7 @@
 <%
 	ExpInfo expert = (ExpInfo)request.getSession().getAttribute("userInfo");
 	expert.refresh();
+	String baseURL = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -13,11 +14,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="information center of experts">
 		
-		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="./css/infoCenter.css">
+		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/infoCenter.css">
 		
-		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<%=baseURL %>/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="<%=baseURL %>/js/bootstrap.min.js"></script>
 
 		<title>专家汇平台</title>
 	</head>
@@ -46,7 +47,7 @@
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<div class="bs-docs-section" id="Overview">
 						<h1 class="page-header">Overview</h1>
-						<form class="form-horizontal" action="expert/updateInfo.action" method="post">
+						<form class="form-horizontal" action="<%=baseURL %>/expert/updateInfo.action" method="post">
 								<div class="form-group"  style="color:white">
 									<label class="col-sm-2 control-label">Expert ID</label>
 									<div class="col-sm-10">
@@ -136,8 +137,8 @@
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
-												<td><a href="enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
+												<td><a href="<%=baseURL %>/project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="<%=baseURL %>/enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
@@ -176,8 +177,8 @@
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
-												<td><a href="enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
+												<td><a href="<%=baseURL %>/project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="<%=baseURL %>/enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
@@ -216,8 +217,8 @@
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
-												<td><a href="project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
-												<td><a href="enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
+												<td><a href="<%=baseURL %>/project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="<%=baseURL %>/enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%

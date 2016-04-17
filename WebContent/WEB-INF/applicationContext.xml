@@ -57,11 +57,15 @@
 	</bean>
 	
 	
-	<!-- Check for Information -->
+	<!-- Check for Enterprise/Expert Information -->
 	<bean name="EntInfoByIdAction" class="com.expertscan.web.action.enterprise.InfoByIdAction" scope="request">
 		<property name="validator" ref="EntValidation"></property>
 	</bean>
+	<bean name="ExpInfoByIdAction" class="com.expertscan.web.action.expert.InfoByIdAction" scope="request">
+		<property name="validator" ref="ExpValidation"></property>
+	</bean>
 	<bean name="EntValidation" class="com.expertscan.business.enterprise.UserValidation" scope="request"></bean>
+	<bean name="ExpValidation" class="com.expertscan.business.expert.UserValidation" scope="request"></bean>
 	
 	
 	<!-- New a Project -->

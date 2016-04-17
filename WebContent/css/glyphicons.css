@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+.bs-glyphicons-list {
+    padding-left: 0;
+    list-style: none;
+}
+
+.bs-glyphicons li button{
+    float: left;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    padding-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+	font-size: 18px;
+    background-color: #f9f9f9;
+    border: 1px solid #aaa;
+}

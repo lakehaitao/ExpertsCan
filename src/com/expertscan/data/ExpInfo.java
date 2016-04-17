@@ -171,4 +171,20 @@ public class ExpInfo {
 		this.projectsCompleted = exp.getProjectsCompleted();
 		this.projectsOngoing = exp.getProjectsOngoing();
 	}
+	
+	public static ExpInfo retrieveById(int expid, boolean needLoad){
+		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		ExpInfo exp = session.load(ExpInfo.class, expid);
+		
+		if(needLoad){
+			Hibernate.initialize(exp.getProjectsBidding());
+			Hibernate.initialize(exp.getProjectsOngoing());
+			Hibernate.initialize(exp.getProjectsCompleted());
+		}
+		
+		session.getTransaction().commit();
+		return exp;
+	}
 }

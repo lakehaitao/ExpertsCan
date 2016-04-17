@@ -33,4 +33,18 @@ public class UserValidation {
 		}
 		
 	}
+	
+	public boolean isSelf(Integer expid, Map<String, Object> session){
+		String userType = (String) session.get("userType");
+		if(userType.equals("expert")){
+			int curID = ((ExpInfo)session.get("userInfo")).getExpid();
+			if(expid.equals(curID)){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
 }

@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="com.expertscan.data.EntInfo, com.expertscan.data.ProjInfo"%>
+    import="com.expertscan.data.ExpInfo, com.expertscan.data.ProjInfo"%>
 <%
-	EntInfo enterprise = (EntInfo)request.getSession().getAttribute("userInfo");
-	enterprise.refresh();
+	ExpInfo expert = (ExpInfo)request.getAttribute("information");
 	String baseURL = request.getContextPath();
 %>
 <!DOCTYPE html>
@@ -34,75 +33,67 @@
 								Projects<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#ProjectsTendering">Projects Tendering</a></li>
+								<li><a href="#ProjectsBidding">Projects Bidding</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="#ProjectsOngoing">Projects Ongoing</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="#ProjectsCompleted">Projects Completed</a></li>
 							</ul>
 						</li>
-						<li><a href="#Recommendations">Recommendations</a></li>
 					</ul>
 				</div>
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 					<div class="bs-docs-section" id="Overview">
 						<h1 class="page-header">Overview</h1>
-						<form class="form-horizontal" action="<%=baseURL %>/enterprise/updateInfo.action" method="post">
-								<div class="form-group"  style="color:white">
-									<label class="col-sm-2 control-label">Enterprise ID</label>
-									<div class="col-sm-10">
-										<p class="form-control-static"><%= enterprise.getEntid() %></p>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">Email</label>
-									<div class="col-sm-10">
-										<p class="form-control-static"><%= enterprise.getEmail() %></p>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">Name</label>
-									<div class="col-sm-10">
-										<input name="name" value="<%= enterprise.getName() %>" class="form-control" placeholder="Name" required>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">Description</label>
-									<div class="col-sm-10">
-										<textarea name="description" class="form-control" rows="3"><%= enterprise.getDescription() %></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">Address</label>
-									<div class="col-sm-10">
-										<textarea name="address" class="form-control" rows="2"><%= enterprise.getAddress() %></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">Phone Number</label>
-									<div class="col-sm-10">
-										<input name="phone0" value="<%= enterprise.getPhone0() %>" class="form-control" placeholder="Phone Number">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">Another Email</label>
-									<div class="col-sm-10">
-										<input type="email" name="email1" value="<%= enterprise.getEmail1() %>" class="form-control" placeholder="Another Email">
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-										<button type="submit" class="btn btn-default">Save Changes</button>
-									</div>
-								</div>
-						</form>
+						<div class="form-group"  style="color:white">
+							<label class="col-sm-2 control-label">Expert ID</label>
+							<div class="col-sm-10">
+								<p class="form-control-static"><%= expert.getExpid() %></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Email</label>
+							<div class="col-sm-10">
+								<p class="form-control-static"><%= expert.getEmail() %></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Name</label>
+							<div class="col-sm-10">
+								<p class="form-control-static"><%= expert.getName() %></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-10">
+								<p class="form-control-static"><%= expert.getDescription() %></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Experiences</label>
+							<div class="col-sm-10">
+								<p class="form-control-static"><%= expert.getExperience() %></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Phone Number</label>
+							<div class="col-sm-10">
+								<p class="form-control-static"><%= expert.getPhone0() %></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Another Email</label>
+							<div class="col-sm-10">
+								<p class="form-control-static"><%= expert.getEmail1() %></p>
+							</div>
+						</div>
 					</div>
 					<div class="bs-docs-section" id="Projects">
 						<h1 class="page-header">Projects</h1>
-						<div id="ProjectsTendering">
-							<h2>Projects Tendering</h2>
+						<div id="ProjectsBidding">
+							<h2>Projects Bidding</h2>
 							<%
-								if(enterprise.getProjectsTendering().size() == 0){
+								if(expert.getProjectsBidding().size() == 0){
 							%>
 								尚无
 							<%
@@ -113,19 +104,23 @@
 											<tr>
 												<th>Project ID</th>
 												<th>Project Title</th>
+												<th>Enterprise</th>
 												<th>Release Date</th>
 											</tr>
 										</thead>
 										<tbody>
 							<%
-									for(ProjInfo p : enterprise.getProjectsTendering()){
+									for(ProjInfo p : expert.getProjectsBidding()){
+										if(p.getState() == 0){
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
 												<td><a href="<%=baseURL %>/project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="<%=baseURL %>/enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
+										}
 									}
 							%>
 										</tbody>
@@ -138,7 +133,7 @@
 						<div id="ProjectsOngoing">
 							<h2>Projects Ongoing</h2>
 							<%
-								if(enterprise.getProjectsOngoing().size() == 0){
+								if(expert.getProjectsOngoing().size() == 0){
 							%>
 								尚无
 							<%
@@ -149,19 +144,23 @@
 											<tr>
 												<th>Project ID</th>
 												<th>Project Title</th>
+												<th>Enterprise</th>
 												<th>Release Date</th>
 											</tr>
 										</thead>
 										<tbody>
 							<%
-									for(ProjInfo p : enterprise.getProjectsOngoing()){
+									for(ProjInfo p : expert.getProjectsOngoing()){
+										if(p.getState() == 1){
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
 												<td><a href="<%=baseURL %>/project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="<%=baseURL %>/enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
+										}
 									}
 							%>
 										</tbody>
@@ -174,7 +173,7 @@
 						<div id="ProjectsCompleted">
 							<h2>Projects Completed</h2>
 							<%
-								if(enterprise.getProjectsCompleted().size() == 0){
+								if(expert.getProjectsCompleted().size() == 0){
 							%>
 								尚无
 							<%
@@ -185,19 +184,23 @@
 											<tr>
 												<th>Project ID</th>
 												<th>Project Title</th>
+												<th>Enterprise</th>
 												<th>Release Date</th>
 											</tr>
 										</thead>
 										<tbody>
 							<%
-									for(ProjInfo p : enterprise.getProjectsCompleted()){
+									for(ProjInfo p : expert.getProjectsCompleted()){
+										if(p.getState() == 2){
 							%>
 											<tr>
 												<td><%=p.getProjid() %></td>
 												<td><a href="<%=baseURL %>/project/information?projid=<%= p.getProjid() %>" target="_blank"><%=p.getTitle() %></a></td>
+												<td><a href="<%=baseURL %>/enterprise/information?entid=<%=p.getEnterprise().getEntid() %>" target="_blank"><%=p.getEnterprise().getName() %></a></td>
 												<td><%=p.getReleaseDate() %></td>
 											</tr>
 							<%
+										}
 									}
 							%>
 										</tbody>
@@ -206,16 +209,6 @@
 								}
 							%>
 						</div>
-					</div>
-					<div class="bs-docs-section" id="Recommendations">
-						<h1 class="page-header">Recommendations</h1>
-						1<br>
-						2<br>
-						3<br>
-						4<br>
-						5<br>
-						6<br>
-						7<br>
 					</div>
 				</div>
 			</div>
