@@ -60,9 +60,27 @@ public class InfoByIdAction extends ActionSupport {
 		}else{
 			request.setAttribute("information", proj);
 			if(validator.isSelf(proj.getEnterprise().getEntid(), session)){
-				return "edit";
+				switch(proj.getState()){
+				case 0:
+					return "edit_tendering";
+				case 1:
+					return "edit_ongoing";
+				case 2:
+					return "edit_completed";
+				default:
+					return ERROR;
+				}
 			}else{
-				return "show";
+				switch(proj.getState()){
+				case 0:
+					return "show_tendering";
+				case 1:
+					return "show_ongoing";
+				case 2:
+					return "show_completed";
+				default:
+					return ERROR;
+				}
 			}
 		}		
 	}

@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="com.expertscan.data.ExpInfo, com.expertscan.data.ProjInfo"%>
+    import="com.expertscan.data.ExpInfo, com.expertscan.data.ProjInfo, com.expertscan.data.ProjExpTendering"%>
 <%
 	ProjInfo project = (ProjInfo)request.getAttribute("information");
 	String baseURL = request.getContextPath();
+	String userType = (String) request.getSession().getAttribute("userType");
+	
+	boolean isExpert = userType.equals("expert");
+	boolean hasApplied = false;
 %>
 <!DOCTYPE html>
 <html>
@@ -15,6 +19,7 @@
 		
 		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/infoCenter.css">
+		<link rel="stylesheet" type="text/css" href="<%=baseURL %>/css/glyphicons.css">
 		
 		<script type="text/javascript" src="<%=baseURL %>/js/jquery-1.11.3.min.js"></script>
 		<script type="text/javascript" src="<%=baseURL %>/js/bootstrap.min.js"></script>
@@ -24,6 +29,8 @@
 	<body>
 		<jsp:include page="../master_nav.jsp" />
 		<div class="container">
+			
+			<!-- Overview Section -->
 			<div class="bs-docs-section" id="Overview">
 				<h1 class="page-header">Overview</h1>
 				<form class="form-horizontal" action="#" method="post">
@@ -87,6 +94,109 @@
 					</div>
 				</form>
 			</div>
+		
+		
+			<!-- Experts Section -->
+			<div class="bs-docs-section" id="Experts">
+				<h1 class="page-header">Experts Applications</h1>
+				<%
+					if(project.getExpertsTendering().size() == 0){
+				%>
+					尚无专家投标
+				<%
+					}else{
+						Integer expertID = null;
+						if(isExpert){
+							expertID = ((ExpInfo)request.getSession().getAttribute("userInfo")).getExpid();
+						}
+						for(ProjExpTendering relation : project.getExpertsTendering()){
+							ExpInfo exp = relation.getExp();
+				%>
+						<div class="border-section row">
+							<div class="col-sm-10">
+								<div class="row">
+									<label class="col-sm-2 control-label">Expert Name</label>
+									<div class="col-sm-10">
+										<%-- <% if(exp.getIsPublic()){ %>
+										<p><a href="expert/information?expid=<%= exp.getExpid() %>" target="_blank"><%= exp.getName() %></a></p>
+										<% }else{ %>
+										<p>Anonymous</p>
+										<% } %> --%>
+										<p><a href="<%=baseURL %>/expert/information?expid=<%= exp.getExpid() %>" target="_blank"><%= exp.getName() %></a></p>
+									</div>
+								</div>
+								<div class="row">
+									<label class="col-sm-2 control-label">Application State</label>
+									<div class="col-sm-10">
+										<%
+											switch(relation.getState()){
+											case 0:
+										%>
+										<p>Pending</p>
+										<%
+											break;
+											case 1:
+										%>
+										<p>Accepted</p>
+										<%
+											break;
+											case 2:
+										%>
+										<p>Denied</p>
+										<% 
+											break;
+											case 3:
+										%>
+										<p>Application Canceled</p>
+										<%
+											break;
+											}
+										%>
+									</div>
+								</div>
+							</div>
+							<%
+								if(isExpert && expertID.equals(exp.getExpid()) && relation.getState()!=3){
+										hasApplied = true;
+							%>
+							<div class="col-sm-2 bs-glyphicons">
+								<ul class="bs-glyphicons-list">
+									<li>
+										<a href="#">
+											<button type="button" class="btn btn-default">
+												<span class="glyphicon glyphicon-remove"></span>
+												&nbsp;
+												<span class="glyphicon-class">Cancel</span>
+											</button>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<%
+								}
+							%>
+						</div>
+				<%
+						}
+
+					}
+				%>	
+			</div>
+		
+			
+			<!-- Apply Section -->
+			<%
+				if(isExpert && !hasApplied){
+					Integer expertID = ((ExpInfo)request.getSession().getAttribute("userInfo")).getExpid();
+			%>
+			<div class="row">			
+				<div class="col-sm-offset-5 col-sm-7">
+					<a href="#"><button class="btn btn-info">Apply This Project !</button></a>
+				</div>
+			</div>
+			<%
+				}
+			%>
 		</div>
 		<jsp:include page="../master_footer.jsp" />
 	</body>

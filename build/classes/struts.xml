@@ -92,8 +92,12 @@
 		</action>
 		
 		<action name="information" class="ProjInfoByIdAction">		
-			<result name="edit">/project/edit_tendering.jsp</result>
-			<result name="show">/project/show_xx.jsp</result>
+			<result name="edit_tendering">/project/edit_tendering.jsp</result>
+			<result name="edit_ongoing">/project/edit_ongoing.jsp</result>
+			<result name="edit_completed">/project/edit_completed.jsp</result>
+			<result name="show_tendering">/project/show_tendering.jsp</result>
+			<result name="show_ongoing">/project/show_ongoing.jsp</result>
+			<result name="show_completed">/project/show_completed.jsp</result>
 		</action>
 		
 	</package>

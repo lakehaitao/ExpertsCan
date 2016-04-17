@@ -95,7 +95,7 @@
 			</div>
 			
 			<div class="bs-docs-section" id="Experts">
-				<h1 class="page-header">Experts</h1>
+				<h1 class="page-header">Experts Applications</h1>
 				<%
 					if(project.getExpertsTendering().size() == 0){
 				%>
@@ -138,6 +138,11 @@
 										<p>Denied</p>
 										<% 
 											break;
+											case 3:
+										%>
+										<p>Application Canceled</p>
+										<%
+											break;
 											}
 										%>
 									</div>
@@ -146,18 +151,22 @@
 							<div class="col-sm-2 bs-glyphicons">
 								<ul class="bs-glyphicons-list">
 									<li>
-										<button type="button" class="btn btn-default">
-											<span class="glyphicon glyphicon-ok"></span>
-											&nbsp;
-											<span class="glyphicon-class">Accept</span>
-										</button>
+										<a href="#">
+											<button type="button" class="btn btn-default">
+												<span class="glyphicon glyphicon-ok"></span>
+												&nbsp;
+												<span class="glyphicon-class">Accept</span>
+											</button>
+										</a>
 									</li>
 									<li>
-										<button type="button" class="btn btn-default">
-											<span class="glyphicon glyphicon-remove"></span>
-											&nbsp;
-											<span class="glyphicon-class">Deny</span>
-										</button>
+										<a href="#">
+											<button type="button" class="btn btn-default">
+												<span class="glyphicon glyphicon-remove"></span>
+												&nbsp;
+												<span class="glyphicon-class">Deny</span>
+											</button>
+										</a>
 									</li>
 								</ul>
 							</div>
