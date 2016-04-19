@@ -80,4 +80,21 @@
 		<property name="validator" ref="EntValidation"></property>
 	</bean>
 	
+	
+	<!-- Project Expert Relationship -->
+	<bean name="ApplyProjectAction" class="com.expertscan.web.action.project.ApplyProjectAction" scope="request">
+		<property name="expValidator" ref="ExpValidation"></property>
+		<property name="entValidator" ref="EntValidation"></property>
+		<property name="service" ref="SetProjectExpertRelation"></property>
+	</bean>
+	<bean name="SetProjectExpertRelation" class="com.expertscan.business.project.SetProjectExpertRelation" scope="request"></bean>
+	
+	
+	<!-- Change Project State -->
+	<bean name="SetProjectStateAction" class="com.expertscan.web.action.project.SetStateAction" scope="request">
+		<property name="entValidator" ref="EntValidation"></property>
+		<property name="service" ref="SetProjectStateService"></property>
+	</bean>
+	<bean name="SetProjectStateService" class="com.expertscan.business.project.SetProjectState"></bean>
+	
 </beans>

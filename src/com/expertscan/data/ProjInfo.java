@@ -18,7 +18,21 @@ public class ProjInfo {
 	private Integer state;
 	
 	private Set<ProjExpTendering> expertsTendering = new HashSet<ProjExpTendering>();
+	private Set<ProjExpOngoing> expertsOngoing = new HashSet<ProjExpOngoing>();
+	private Set<ProjExpCompleted> expertsCompleted = new HashSet<ProjExpCompleted>();
 	
+	public Set<ProjExpCompleted> getExpertsCompleted() {
+		return expertsCompleted;
+	}
+	public void setExpertsCompleted(Set<ProjExpCompleted> expertsCompleted) {
+		this.expertsCompleted = expertsCompleted;
+	}
+	public Set<ProjExpOngoing> getExpertsOngoing() {
+		return expertsOngoing;
+	}
+	public void setExpertsOngoing(Set<ProjExpOngoing> expertsOngoing) {
+		this.expertsOngoing = expertsOngoing;
+	}
 	public Set<ProjExpTendering> getExpertsTendering() {
 		return expertsTendering;
 	}
@@ -104,11 +118,34 @@ public class ProjInfo {
 		
 		if(needLoad){
 			Hibernate.initialize(proj.getEnterprise());
-		
-			Hibernate.initialize(proj.getExpertsTendering());
+			
+			switch(proj.getState()){
+			case 0:
+				Hibernate.initialize(proj.getExpertsTendering());
+				break;
+			case 1:
+				Hibernate.initialize(proj.getExpertsOngoing());
+				break;
+			case 2:
+				Hibernate.initialize(proj.getExpertsCompleted());
+				break;
+			}
+			
 		}
 		
 		session.getTransaction().commit();
 		return proj;
+	}
+	
+	public boolean changeState(Integer state){
+		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		ProjInfo project = session.load(ProjInfo.class, projid);
+		project.setState(state);
+		
+		session.update(project);
+		session.getTransaction().commit();
+		return true;
 	}
 }

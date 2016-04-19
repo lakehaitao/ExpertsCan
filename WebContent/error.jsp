@@ -10,6 +10,6 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		用户名密码错误
+		Something Error
 	</body>
 </html>

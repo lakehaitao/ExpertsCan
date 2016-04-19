@@ -30,21 +30,25 @@
 			<result name="success" type="redirect">/</result>
 			<result name="signinRepeatedly">/error.jsp</result>
 			<result name="input">/expert/signin_error.jsp</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="signUpRequest" class="ExpertSignupAction">		
 			<interceptor-ref name="defaultStack" />
 			<result name="success" type="redirect">/</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="updateInfo" class="UpdateExpInfoAction">		
 			<result name="success" type="redirect">/informationCenter</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="information" class="ExpInfoByIdAction">		
 			<result name="self" type="redirect">/informationCenter</result>
 			<result name="success">/expert/InformationShow.jsp</result>
 			<result name="anonymous">/expert/Anonymous.jsp</result>
+			<result name="error">/error.jsp</result>
 		</action>
 	
 	</package>
@@ -60,23 +64,28 @@
 			<result name="success" type="redirect">/</result>
 			<result name="signinRepeatedly">/error.jsp</result>
 			<result name="input">/enterprise/signin_error.jsp</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="signUpRequest" class="EnterpriseSignupAction">
 			<result name="success" type="redirect">/</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="updateInfo" class="UpdateEntInfoAction">		
 			<result name="success" type="redirect">/informationCenter</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="information" class="EntInfoByIdAction">		
 			<result name="self" type="redirect">/informationCenter</result>
 			<result name="success">/enterprise/InformationShow.jsp</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="newProjectPage" class="CanNewProj">		
 			<result name="success">/project/new.jsp</result>
+			<result name="error">/error.jsp</result>
 		</action>
 	
 	</package>
@@ -89,6 +98,7 @@
 		
 		<action name="new" class="NewProj">		
 			<result name="success">/project/edit_tendering.jsp</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="information" class="ProjInfoByIdAction">		
@@ -98,6 +108,17 @@
 			<result name="show_tendering">/project/show_tendering.jsp</result>
 			<result name="show_ongoing">/project/show_ongoing.jsp</result>
 			<result name="show_completed">/project/show_completed.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="apply" class="ApplyProjectAction">
+			<result name="success" type="redirect">/project/information?projid=${projid}</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="set" class="SetProjectStateAction">
+			<result name="success" type="redirect">/project/information?projid=${projid}</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 	</package>
@@ -119,11 +140,13 @@
 		
 		<action name="signout" class="SignoutAction">
 			<result name="success" type="redirect">/</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="informationCenter" class="InfoCenterAction">
 			<result name="expert">/expert/InformationCenter.jsp</result>
 			<result name="enterprise">/enterprise/InformationCenter.jsp</result>
+			<result name="error">/error.jsp</result>
 		</action>
 		
 		<action name="test">

@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="com.expertscan.data.ExpInfo, com.expertscan.data.ProjInfo, com.expertscan.data.ProjExpTendering"%>
+    import="com.expertscan.data.ExpInfo, com.expertscan.data.ProjInfo, com.expertscan.data.ProjExpOngoing"%>
 <%
 	ProjInfo project = (ProjInfo)request.getAttribute("information");
 	String baseURL = request.getContextPath();
 	String userType = (String) request.getSession().getAttribute("userType");
 	
 	boolean isExpert = userType.equals("expert");
-	boolean hasApplied = false;
 %>
 <!DOCTYPE html>
 <html>
@@ -73,7 +72,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">State</label>
 						<div class="col-sm-10">
-							<p class="form-control-static">Tendering</p>
+							<p class="form-control-static">Ongoing</p>
 						</div>
 					</div>
 				</form>
@@ -82,19 +81,14 @@
 		
 			<!-- Experts Section -->
 			<div class="bs-docs-section" id="Experts">
-				<h1 class="page-header">Experts Applications</h1>
+				<h1 class="page-header">Experts</h1>
 				<%
-					if(project.getExpertsTendering().size() == 0){
-				%>
-					尚无专家投标
-				<%
-					}else{
-						Integer expertID = null;
-						if(isExpert){
-							expertID = ((ExpInfo)request.getSession().getAttribute("userInfo")).getExpid();
-						}
-						for(ProjExpTendering relation : project.getExpertsTendering()){
-							ExpInfo exp = relation.getExp();
+					Integer expertID = null;
+					if(isExpert){
+						expertID = ((ExpInfo)request.getSession().getAttribute("userInfo")).getExpid();
+					}
+					for(ProjExpOngoing relation : project.getExpertsOngoing()){
+						ExpInfo exp = relation.getExp();
 				%>
 						<div class="border-section row">
 							<div class="col-sm-10">
@@ -109,51 +103,17 @@
 									</div>
 								</div>
 								<div class="row">
-									<label class="col-sm-2 control-label">Application State</label>
+									<label class="col-sm-2 control-label">Some State</label>
 									<div class="col-sm-10">
-										<%
-											switch(relation.getState()){
-											case 0:
-										%>
-										<p>Pending</p>
-										<%
-											break;
-											case 1:
-										%>
-										<p>Accepted</p>
-										<%
-											break;
-											case 2:
-										%>
-										<p>Denied</p>
-										<% 
-											break;
-											case 3:
-										%>
-										<p>Application Canceled</p>
-										<%
-											break;
-											}
-										%>
+										<p>some state</p>
 									</div>
 								</div>
 							</div>
 							<%
-								if(isExpert && expertID.equals(exp.getExpid()) && relation.getState()!=3){
-										hasApplied = true;
+								if(isExpert && expertID.equals(exp.getExpid())){
 							%>
 							<div class="col-sm-2 bs-glyphicons">
-								<ul class="bs-glyphicons-list">
-									<li>
-										<a href="<%=baseURL %>/project/apply?projid=<%=project.getProjid() %>&expid=<%=expertID %>&state=3">
-											<button type="button" class="btn btn-default">
-												<span class="glyphicon glyphicon-remove"></span>
-												&nbsp;
-												<span class="glyphicon-class">Cancel</span>
-											</button>
-										</a>
-									</li>
-								</ul>
+								<p>Is Me!</p>
 							</div>
 							<%
 								}
@@ -161,27 +121,8 @@
 						</div>
 				<%
 						}
-
-					}
 				%>	
 			</div>
-		
-			
-			<!-- Apply Section -->
-			<%
-				if(isExpert && !hasApplied){
-					Integer expertID = ((ExpInfo)request.getSession().getAttribute("userInfo")).getExpid();
-			%>
-			<div class="row">			
-				<div class="col-sm-offset-5 col-sm-7">
-					<a href="<%=baseURL %>/project/apply?projid=<%=project.getProjid() %>&expid=<%=expertID %>&state=0">
-						<button class="btn btn-info">Apply This Project !</button>
-					</a>
-				</div>
-			</div>
-			<%
-				}
-			%>
 		</div>
 		<jsp:include page="../master_footer.jsp" />
 	</body>

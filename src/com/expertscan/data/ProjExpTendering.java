@@ -2,6 +2,8 @@ package com.expertscan.data;
 
 import java.io.Serializable;
 
+import org.hibernate.Session;
+
 public class ProjExpTendering implements Serializable{
 
 	/**
@@ -33,5 +35,18 @@ public class ProjExpTendering implements Serializable{
 		this.state = state;
 	}
 	
+	
+	public boolean updateRelationship(Integer projid, Integer expid, Integer state){
+		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		this.proj = session.load(ProjInfo.class, projid);
+		this.exp = session.load(ExpInfo.class, expid);
+		this.state = state;
+		session.saveOrUpdate(this);
+		
+		session.getTransaction().commit();
+		return true;
+	}
 	
 }

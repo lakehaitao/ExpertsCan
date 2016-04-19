@@ -16,6 +16,7 @@
 		<property name="phone0" column="phone0"></property>
 		<property name="email1" column="email1"></property>
 		<property name="isPublic" column="ispublic"></property>
+		<property name="rate" column="rate"></property>
 		
 		<set name="projectsBidding" table="proj_exp_tendering" cascade="save-update">
 			<key column="expid"></key>

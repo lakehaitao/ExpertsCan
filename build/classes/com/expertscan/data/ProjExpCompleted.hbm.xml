@@ -5,8 +5,13 @@
 <hibernate-mapping package="com.expertscan.data">
 	<class name="ProjExpCompleted" table="proj_exp_completed">
 		<composite-id>
-			<key-property name="projid" column="projid"></key-property>
-			<key-property name="expid" column="expid"></key-property>
+			<key-many-to-one name="proj" class="ProjInfo" column="projid" lazy="false"></key-many-to-one>
+			<key-many-to-one name="exp" class="ExpInfo" column="expid" lazy="false"></key-many-to-one>
 		</composite-id>
+		
+		<property name="commentsFromExp" column="comments_from_exp"></property>
+		<property name="commentsFromEnt" column="comments_from_ent"></property>
+		<property name="rateFromExp" column="rate_from_exp"></property>
+		<property name="rateFromEnt" column="rate_from_ent"></property>
 	</class>
 </hibernate-mapping>

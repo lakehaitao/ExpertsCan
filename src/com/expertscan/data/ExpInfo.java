@@ -19,11 +19,18 @@ public class ExpInfo {
 	private String phone0;
 	private String email1;
 	private Boolean isPublic;
+	private Integer rate;
 	private Set<ProjInfo> projectsBidding = new HashSet<ProjInfo>();
 	private Set<ProjInfo> projectsOngoing = new HashSet<ProjInfo>();
 	private Set<ProjInfo> projectsCompleted = new HashSet<ProjInfo>();
 		
 	
+	public Integer getRate() {
+		return rate;
+	}
+	public void setRate(Integer rate) {
+		this.rate = rate;
+	}
 	public Set<ProjInfo> getProjectsBidding() {
 		return projectsBidding;
 	}

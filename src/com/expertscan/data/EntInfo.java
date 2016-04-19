@@ -18,8 +18,15 @@ public class EntInfo {
 	private String phone0;
 	private String description;
 	private String logo;
+	private Integer rate;
 	private Set<ProjInfo> projects = new HashSet<ProjInfo>();	
 	
+	public Integer getRate() {
+		return rate;
+	}
+	public void setRate(Integer rate) {
+		this.rate = rate;
+	}
 	public Set<ProjInfo> getProjects() {
 		return projects;
 	}

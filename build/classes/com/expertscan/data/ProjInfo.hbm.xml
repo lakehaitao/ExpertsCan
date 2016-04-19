@@ -22,5 +22,13 @@
 			<key column="projid"></key>
 			<one-to-many class="ProjExpTendering"/>
 		</set>
+		<set name="expertsOngoing" table="proj_exp_ongoing" cascade="save-update">
+			<key column="projid"></key>
+			<one-to-many class="ProjExpOngoing"/>
+		</set>
+		<set name="expertsCompleted" table="proj_exp_completed" cascade="save-update">
+			<key column="projid"></key>
+			<one-to-many class="ProjExpCompleted"/>
+		</set>
 	</class>
 </hibernate-mapping>
