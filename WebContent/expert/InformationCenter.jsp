@@ -91,6 +91,12 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="col-sm-2 control-label">Rate</label>
+									<div class="col-sm-10">
+										<p class="form-control-static"><%= expert.getRate() %></p>
+									</div>
+								</div>
+								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<div class="checkbox">
 											<label>

@@ -88,6 +88,12 @@
 										<p class="form-control-static"><%= enterprise.getEmail1() %></p>
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Rate</label>
+									<div class="col-sm-10">
+										<p class="form-control-static"><%= enterprise.getRate() %></p>
+									</div>
+								</div>
 						</form>
 					</div>
 					<div class="bs-docs-section" id="Projects">

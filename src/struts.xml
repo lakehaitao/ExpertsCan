@@ -121,6 +121,11 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		
+		<action name="comment" class="CommentOnProject">
+			<result name="success" type="redirect">/project/information?projid=${projid}</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
 	</package>
 	
 	

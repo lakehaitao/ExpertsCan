@@ -97,4 +97,13 @@
 	</bean>
 	<bean name="SetProjectStateService" class="com.expertscan.business.project.SetProjectState"></bean>
 	
+	
+	<!-- Comment on Project -->
+	<bean name="CommentOnProject" class="com.expertscan.web.action.project.CommentOnProject" scope="request">
+		<property name="expValidator" ref="ExpValidation"></property>
+		<property name="entValidator" ref="EntValidation"></property>
+		<property name="service" ref="CommentService"></property>
+	</bean>
+	<bean name="CommentService" class="com.expertscan.business.project.CommentService" scope="request"></bean>
+	
 </beans>

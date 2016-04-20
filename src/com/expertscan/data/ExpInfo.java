@@ -19,16 +19,16 @@ public class ExpInfo {
 	private String phone0;
 	private String email1;
 	private Boolean isPublic;
-	private Integer rate;
+	private Float rate;
 	private Set<ProjInfo> projectsBidding = new HashSet<ProjInfo>();
 	private Set<ProjInfo> projectsOngoing = new HashSet<ProjInfo>();
 	private Set<ProjInfo> projectsCompleted = new HashSet<ProjInfo>();
 		
 	
-	public Integer getRate() {
+	public Float getRate() {
 		return rate;
 	}
-	public void setRate(Integer rate) {
+	public void setRate(Float rate) {
 		this.rate = rate;
 	}
 	public Set<ProjInfo> getProjectsBidding() {
@@ -129,6 +129,8 @@ public class ExpInfo {
 	}
 	
 	public boolean insertToDB(){
+		this.rate = Float.valueOf(5);
+		
 		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
 		
 		session.beginTransaction();
@@ -177,6 +179,7 @@ public class ExpInfo {
 		this.projectsBidding = exp.getProjectsBidding();
 		this.projectsCompleted = exp.getProjectsCompleted();
 		this.projectsOngoing = exp.getProjectsOngoing();
+		this.rate = exp.getRate();
 	}
 	
 	public static ExpInfo retrieveById(int expid, boolean needLoad){
@@ -193,5 +196,35 @@ public class ExpInfo {
 		
 		session.getTransaction().commit();
 		return exp;
+	}
+	
+	
+	public boolean updateRate(Integer expid){
+		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		ExpInfo expert = session.load(ExpInfo.class, expid);
+		if(expert == null){
+			return false;
+		}
+		float score = 0;
+		int count = 0;
+		for(ProjInfo project: expert.getProjectsCompleted()){
+			for(ProjExpCompleted relation:project.getExpertsCompleted()){
+				if(relation.getRateFromEnt() >= 0){
+					score +=relation.getRateFromEnt();
+					count++;
+				}
+			}
+		}
+		if(count > 0){
+			expert.setRate(score / count);
+		}else{
+			expert.setRate(Float.valueOf(5));
+		}
+		System.out.println("ddddd:" + score);
+		session.update(expert);
+		session.getTransaction().commit();
+		return true;
 	}
 }

@@ -71,4 +71,36 @@ public class ProjExpCompleted implements Serializable{
 		session.getTransaction().commit();
 		return true;
 	}
+	
+	
+	public boolean updateByEnt(Integer projid, Integer expid, String comment, Integer rate){
+		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		this.proj = session.load(ProjInfo.class, projid);
+		this.exp = session.load(ExpInfo.class, expid);
+		ProjExpCompleted relation = session.load(ProjExpCompleted.class, this);
+		relation.setCommentsFromEnt(comment);
+		relation.setRateFromEnt(rate);
+
+		session.update(relation);
+		session.getTransaction().commit();
+		return true;
+	}
+	
+public boolean updateByExp(Integer projid, Integer expid, String comment, Integer rate){
+		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		this.proj = session.load(ProjInfo.class, projid);
+		this.exp = session.load(ExpInfo.class, expid);
+		ProjExpCompleted relation = session.load(ProjExpCompleted.class, this);
+		relation.setCommentsFromExp(comment);
+		relation.setRateFromExp(rate);
+		
+		session.update(relation);
+		
+		session.getTransaction().commit();
+		return true;
+	}
 }

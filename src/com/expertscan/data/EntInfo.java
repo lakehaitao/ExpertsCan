@@ -18,13 +18,13 @@ public class EntInfo {
 	private String phone0;
 	private String description;
 	private String logo;
-	private Integer rate;
+	private Float rate;
 	private Set<ProjInfo> projects = new HashSet<ProjInfo>();	
 	
-	public Integer getRate() {
+	public Float getRate() {
 		return rate;
 	}
-	public void setRate(Integer rate) {
+	public void setRate(Float rate) {
 		this.rate = rate;
 	}
 	public Set<ProjInfo> getProjects() {
@@ -125,6 +125,8 @@ public class EntInfo {
 	
 	
 	public boolean insertToDB(){
+		this.rate = Float.valueOf(5);
+		
 		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
 		
 		session.beginTransaction();
@@ -169,6 +171,7 @@ public class EntInfo {
 		this.password = ent.password;
 		this.phone0 = ent.phone0;
 		this.projects = ent.getProjects();
+		this.rate = ent.getRate();
 	}
 	
 	public Set<ProjInfo> getProjectsTendering() {
@@ -196,6 +199,36 @@ public class EntInfo {
 				projectsCompleted.add(p);
 		}
 		return projectsCompleted;
+	}
+	
+	public boolean updateRateByProjID(Integer projid){
+		Session session = HibernateHelpUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		ProjInfo proj = session.load(ProjInfo.class, projid);
+		if(proj == null){
+			return false;
+		}
+		EntInfo enterprise = proj.getEnterprise(); 
+		float score = 0;
+		int count = 0;
+		for(ProjInfo project: enterprise.getProjectsCompleted()){
+			for(ProjExpCompleted relation:project.getExpertsCompleted()){
+				if(relation.getRateFromExp() >= 0){
+					score +=relation.getRateFromExp();
+					count++;
+				}
+			}
+		}
+		if(count > 0){
+			enterprise.setRate(score / count);
+		}else{
+			enterprise.setRate(Float.valueOf(5));
+		}
+		
+		session.update(enterprise);
+		session.getTransaction().commit();
+		return true;
 	}
 
 }

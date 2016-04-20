@@ -87,6 +87,12 @@
 								<p class="form-control-static"><%= expert.getEmail1() %></p>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Rate</label>
+							<div class="col-sm-10">
+								<p class="form-control-static"><%= expert.getRate() %></p>
+							</div>
+						</div>
 					</div>
 					<div class="bs-docs-section" id="Projects">
 						<h1 class="page-header">Projects</h1>
